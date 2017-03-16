@@ -8,6 +8,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import pkgLibrary.Book;
+import pkgLibrary.BookException;
 import pkgLibrary.Catalog;
 
 public class XMLReader {
@@ -15,21 +16,12 @@ public class XMLReader {
 	public static void main(String[] args) {
 
 		Catalog cat = null;
-		
-		//	Read the XML catalog into 'cat'
 		cat = ReadCatalog();
-		
-		//	Increase the price of each book
 		IncreasePrice(cat,0.10);
-		
-		//	Write the XML file from 'cat' object
 		WriteXMLFile(cat);
 		
 	}
 
-
-	
-	
 	private static Catalog ReadCatalog() {
 		Catalog cat = ReadXMLFile();
 		
@@ -91,5 +83,13 @@ public class XMLReader {
 		return cat;
 
 	}
-
+	public static Catalog calcCosts(Catalog cat, double costof)
+	{
+			for (Book b : cat.getBooks()) {
+					double newPrice = (b.getPrice() * costof) - b.getPrice();
+					b.setCost(Math.round(newPrice * 100.0) / 100.0);
+			}
+			
+			return cat;
+	}
 }

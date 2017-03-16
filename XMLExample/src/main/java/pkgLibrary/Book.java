@@ -1,7 +1,11 @@
 package pkgLibrary;
 
+import java.io.File;
 import java.util.Date;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,6 +19,7 @@ public class Book {
 	private double price;
 	private Date publish_date;
 	private String description;
+	private double Cost;
 
 	public Book() {
 
@@ -32,7 +37,9 @@ public class Book {
 		this.description = description;
 	}
 	
- 
+	public Book(String IDindex){
+			this.id=IDindex;
+	}
 
 	public String getId() {
 		return id;
@@ -97,7 +104,12 @@ public class Book {
 		this.description = description;
 	}
 
+	@XmlElement
+	public void setCost(double Cost){
+			this.Cost=Cost;
+	}
 	
-	
-
+	public double getCost(){
+			return Cost;
+	}
 }
